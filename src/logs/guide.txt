@@ -1,0 +1,5 @@
+import log from '../../../logs/logger';
+
+log.info('[MESSAGE]'); // Send infomation and save to log file on server 
+log.error('[MESSAGE]'); // Send error details and save to log file on server 
+log.warn('[MESSAGE]'); // Send warning message and save to log file on server 
