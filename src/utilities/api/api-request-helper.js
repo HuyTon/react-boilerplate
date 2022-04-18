@@ -1,4 +1,4 @@
-import memCache from '../../cache/client.cache';
+import memCache from '@cache/client.cache';
 import { isEmpty } from "lodash";
 
 /********** Process api base endpoint **********/

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserList from '../views/user-list';
-import * as userApi from '../../../services/user-api';
-import store from '../../../store/store';
-import { loadSearchLayout } from '../../../store/actions/search-layout-actions';
-import ErrorBoundary from '../../../common/components/errorBoundary/error-boundary';
+import * as userApi from '@services/user-api';
+import store from '@store/store';
+import { loadSearchLayout } from '@store/actions/search-layout-actions';
+import ErrorBoundary from '@components/errorBoundary/error-boundary';
 
 class UserListContainer extends React.Component {
 

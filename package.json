@@ -1,7 +1,7 @@
 {
   "name": "react-boierplate",
   "version": "1.0.0",
-  "description": "A boilerplate to build web application using React, Redux and Webpack. Unit testing with Jest framework and Enzyme",
+  "description": "A boilerplate to build web application using React, Redux and Webpack. Perform unit testing with Jest framework and Enzyme",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack -p --progress --config=webpack/webpack.prod.js --mode production",
@@ -19,9 +19,8 @@
   "author": "Huy Ton",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.26.1",
     "babel-polyfill": "^6.26.0",
-    "chunk-manifest-webpack-plugin": "^1.1.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
@@ -42,7 +41,7 @@
     "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
-    "@appbaseio/reactivesearch": "^3.12.7",
+    "@appbaseio/reactivesearch": "^3.30.0",
     "@auth0/auth0-react": "^1.1.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
@@ -74,7 +73,7 @@
     "nodemon": "^1.17.3",
     "react-code-splitting": "^1.2.1",
     "react-test-renderer": "^16.13.1",
-    "redis": "^3.0.2",
+    "redis": "^3.1.2",
     "redux-mock-store": "^1.5.4",
     "style-loader": "^0.23.0",
     "url-loader": "^1.0.1",

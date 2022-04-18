@@ -35,7 +35,18 @@ module.exports = {
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    alias: {
+      // Due to this file 'webpack.common.js' is placed inside the folder webpack. 
+      // Then, we need to specify the path with '../src/'. Otherwise, it should be 'src/'. 
+      '@pages': path.resolve(__dirname, '../src/pages/'),
+      '@components': path.resolve(__dirname, '../src/common/components/'),
+      '@utilities': path.resolve(__dirname, '../src/utilities/'),
+      '@services': path.resolve(__dirname, '../src/services/'),
+      '@store': path.resolve(__dirname, '../src/store/'),
+      '@logs': path.resolve(__dirname, '../src/logs/'),
+      '@cache': path.resolve(__dirname, '../src/cache/')
+    }
   },
   stats: {
     colors: false,

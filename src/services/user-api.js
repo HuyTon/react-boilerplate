@@ -1,7 +1,7 @@
 import axios from 'axios';
-import APIRequestHelper from '../utils/api/api-request-helper';
-import store from '../store/store';
-import { getUsersSuccess, deleteUserSuccess, userProfileSuccess } from '../store/actions/user-actions';
+import APIRequestHelper from '@utilities/api/api-request-helper';
+import store from '@store/store';
+import { getUsersSuccess, deleteUserSuccess, userProfileSuccess } from '@store/actions/user-actions';
 
 /**
  * Get all users

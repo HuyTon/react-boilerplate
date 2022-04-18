@@ -1,13 +1,6 @@
 import log from 'loglevel';
 import remote from 'loglevel-plugin-remote';
-import APIRequestHelper from '../utils/api/api-request-helper';
-
-// const customJSON = log => ({
-//     msg: log.message,
-//     level: log.level.label,
-//     stacktrace: log.stacktrace
-// });
-// remote.apply(log, { format: customJSON, url: '/logger' });
+import APIRequestHelper from '@utilities/api/api-request-helper';
 
 const api = process.env.REACT_APP_LOG_API;
 const url = api.indexOf('http') == 0 ? api :

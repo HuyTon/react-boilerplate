@@ -20,14 +20,6 @@ const MainNav = () => (
         Users
       </NavLink>
       <NavLink
-        to="/ideas"
-        exact
-        className="nav-link"
-        activeClassName="router-link-exact-active"
-      >
-        Ideas
-      </NavLink>
-      <NavLink
         to="/datatable"
         exact
         className="nav-link"

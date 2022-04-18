@@ -1,56 +1,48 @@
-A. LRU Cache
+# A. Least Recently Used (LRU) Cache
+A doubly linked list-based Least Recently Used (LRU) cache. Will keep most recently used items while discarding least recently used items when its limit is reached.
 
+## Description
 A cache object that deletes the least-recently-used items. A Least Recently Used (LRU) Cache organizes items in order of use, allowing you to quickly identify which item hasn't been used for the longest amount of time.
-Costs
+
+### Costs
                               Worst Case
-space	                        O(n)
-get least recently used item	O(1)
-access item	                  O(1)
+- space	                        O(n)
+- get least recently used item	O(1)
+- access item	                O(1)
 
-Sample of using cache:
-    
-    Save and fetch cached pages—src/middleware/renderView.jsx
-    
-    import cache from '../shared/cache.es6';
+## Illustration of the design
+ 
+        entry             entry             entry             entry
+        ______            ______            ______            ______
+       | head |.newer => |      |.newer => |      |.newer => | tail |
+       |  A   |          |  B   |          |  C   |          |  D   |
+       |______| <= older.|______| <= older.|______| <= older.|______|
+ 
+   removed  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  added
 
-    //..other code
-
-    const cachedPage = cache.get(req.url);
-    if (cachedPage) {
-    return res.send(cachedPage);
-    }
-
-    const store = initRedux();
-    //...more code
-    Promise.all(promises).then(() => {
-    //...more code
-    cache.set(req.url, `<!DOCTYPE html>${html}`);
-    return res.send(`<!DOCTYPE html>${html}`);
-    })
-
-Strengths:
+## Strengths
     - Super fast accesses. LRU caches store items in order from most-recently used to least-recently used. That means both can be accessed in O(1)O(1) time.
     - Super fast updates. Each time an item is accessed, updating the cache takes O(1)O(1) time.
 
-Weaknesses
+## Weaknesses
     - Space heavy. An LRU cache tracking nn items requires a linked list of length nn, and a hash map holding nn items. That's O(n)O(n) space, but it's still two data structures (as opposed to one).
 
-Dataflow
+## Dataflow
     - Try and retrieve the value from the cache.
     - If the value exists, use it to respond to the request.
     - If a full-page render is required, then save the rendered page before responding to the request.
 
-There are some problems with this strategy:
+## There are some problems with this strategy:
     - This solution is simple – but what happens when the use cases get more complex? What happens as you start to add users? Or multiple languages? Or you have tens of thousands of pages? This methodology doesn’t scale well to these use cases.
     - Writing to memory is a blocking task in Node.js, which means that if we’re trying to optimize for performance by using a cache, we’re trading one problem for another.
     - Finally, if you’re using a distributed scaling strategy to run your servers (which is common these days), the cache only applies to a single box or container (if using Docker). In this case, your server instances can’t share a common cache.
 
+# B. Redis LRU cache
+To decrease effective of the LRU cache's memory cost. The best solution to consider is using Redis LRU cache.
 
+[https://redis.io/topics/lru-cache](https://redis.io/topics/lru-cache)
 
-B. To decrease effective of the LRU cache's memory cost. The best solution to consider is using Redis LRU cache:  
-https://redis.io/topics/lru-cache
-
-Using Redis as an LRU cache:
+## Using Redis as an LRU cache:
   - When Redis is used as a cache, often it is handy to let it automatically evict old data as you add new data. This behavior is very well known in the community of developers, since it is the default behavior of the popular memcached system.
   - Starting with Redis version 4.0, a new LFU (Least Frequently Used) eviction policy was introduced. This is covered in a separated section of this documentation.
   - Starting with Redis 4.0, a new Least Frequently Used eviction mode is available. This mode may work better (provide a better hits/misses ratio) in certain cases, since using LFU Redis will try to track the frequency of access of items, so that the ones used rarely are evicted while the one used often have an higher chance of remaining in memory.
@@ -66,51 +58,29 @@ Using Redis as an LRU cache:
         lfu-log-factor 10
         lfu-decay-time 1
 
+# C. Redis Setup and Configures at Server Side
 
-C. Universal Cookies
+## Configuring Redis as a LRU cache 
+In this configuration there is no need for the application to set a time to live for keys using the EXPIRE command (or equivalent) since all the keys will be evicted using an approximated LRU algorithm as long as we hit the 100 megabyte memory limit.
+  - CONFIG SET maxmemory 100mb
+  - CONFIG SET maxmemory-policy allkeys-lru
 
-Sample for accessing cookies on the server—src/shared/app-action-creators.es6
-import UAParser from 'ua-parser-js';
-import cookies from './cookies.es6';
-
-export const PARSE_USER_AGENT = 'PARSE_USER_AGENT';
-export const STORE_USER_ID = 'STORE_USER_ID';
-
-export function parseUserAgent(requestHeaders) {}
-
-export function storeUserId(requestHeaders) {
-  const userId = cookies.get('userId', requestHeaders);
-  return {
-    userId,
-    type: STORE_USER_ID
-  };
-}
-
-export default {
-  parseUserAgent,
-  storeUserId
-};
-
-
-D. Redis Setup and Configures at Server Side
-
-If facing the error: ERR AUTH <password> called without any password configured for the default user. Run the command below in terminal:
+## If facing the error: ERR AUTH <password> called without any password configured for the default user. Run the command below in terminal
   - For one time instance:
     config set requirepass admin
   - For long time:
     Open redis.conf file and uncomment the text #requirepass foobared.
     'foobared' is default password, need to change to your password is 'admin'
 
-Configuring Redis as a LRU cache: In this configuration there is no need for the application to set a time to live for keys using the EXPIRE command (or equivalent) since all the keys will be evicted using an approximated LRU algorithm as long as we hit the 100 megabyte memory limit.
-  - CONFIG SET maxmemory 100mb
-  - CONFIG SET maxmemory-policy allkeys-lru
-
-Using redis cache middleware: inject the function checkCache to API need to get data from cache. The content of API will be executed if did not have the cached data.
+## Using redis cache middleware: 
+Inject the function checkCache to API need to get data from cache. The content of API will be executed if did not have the cached data.
 Inside the API content, need to set caching data to using for the next time.
 
+```
 Sample: app.get("/api/users/:id", checkCache, async function (req, res) {
   ....
   // Cache user info
   redis_client.set(req.url, JSON.stringify(userObj));   
   ....
 }
+```

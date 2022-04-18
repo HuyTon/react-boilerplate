@@ -1,6 +1,6 @@
 import React from 'react';
-import * as userApi from '../../../services/user-api';
-import * as widgetApi from '../../../services/widget-api';
+import * as userApi from '@services/user-api';
+import * as widgetApi from '@services/widget-api';
 import SearchForm from '../views/search-form';
 
 export default class SearchFormContainer extends React.Component {

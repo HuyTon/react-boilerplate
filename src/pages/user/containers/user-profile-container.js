@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../views/user-profile';
-import * as userApi from '../../../services/user-api';
+import * as userApi from '@services/user-api';
 
 class UserProfileContainer extends React.Component {
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { generateData } from '../../../utils/data/data-generation';
+import { generateData } from '@utilities/mock-data/data-generation';
 import styled from 'styled-components';
 
 const useSortableData = (items, config = null) => {    

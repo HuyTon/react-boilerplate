@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import WidgetList from '../views/widget-list';
-import * as widgetApi from '../../../services/widget-api';
-import store from '../../../store/store';
-import { loadSearchLayout } from '../../../store/actions/search-layout-actions';
+import * as widgetApi from '@services/widget-api';
+import store from '@store/store';
+import { loadSearchLayout } from '@store/actions/search-layout-actions';
 
 class WidgetListContainer extends React.Component {
 
