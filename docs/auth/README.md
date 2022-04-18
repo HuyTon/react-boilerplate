@@ -1,14 +1,14 @@
-# Authentication As A Service Platform
+# Authentication as a Service Platform
+This boilerplate uses the Auth0 React SDK to secure React applications, which provides React developers with an easier way to add user authentication to React applications using a hooks-centric approach.
 
 ## Signup Auth0
 [https://auth0.com/signup](https://auth0.com/signup)
 
 ## Descriptions
-- 7,000 free active users and unlimited logins.
-- Auth0 Universal Login for Web, iOS & Android.
-- Up to 2 social identity providers like Google, GitHub, and Twitter.
-- Unlimited Serverless Rules to customize and extend Auth0's capabilities.
-- During the sign-up process, you create something called an Auth0 Tenant, representing the product or service to which you are adding authentication.
+- Add user login and logout.
+- Retrieve user information.
+- Protect application routes.
+- Call protected endpoints from an API.
 
 ## Reference Links
 - [Complete guide to react user authentication](https://auth0.com/blog/complete-guide-to-react-user-authentication)

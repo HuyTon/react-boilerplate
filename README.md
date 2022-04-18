@@ -12,11 +12,12 @@ The source code is already set up with the following libraries:
 - React Testing Library with Jest frameworkd and Enzyme
 
 ## Components
-1. [Authentication](./docs/auth)
-2. [Caching](/docs/cache)
-3. [Cookie](/docs/cookie)
-4. [Logs](/docs/logs)
-5. [Context](/docs/context)
+1. [Project Structure](./docs/project-structure)
+2. [Authentication](./docs/auth)
+3. [Caching](/docs/cache)
+4. [Cookie](/docs/cookie)
+5. [Logs](/docs/logs)
+6. [Context](/docs/context)
 
 ## How to use this boilerplate?
 
