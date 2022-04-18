@@ -1,0 +1,4 @@
+1/ uglifyjs-webpack-plugin use uglify-js to compress code and uglify-js doesn't support ES6. 
+The common error with es6 like "Unexpected token: keyword (const)...".
+
+* Need to use terser-webpack-plugin for ES6 
